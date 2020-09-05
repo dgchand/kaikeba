@@ -1,0 +1,12 @@
+Thinking1	MVC框架指的是什么
+
+MVC是model view controller 模型-视图-控制器设计创建web应用程序的模式。model是与数据相关的模型层，views是网页的网址、以及渲染网页等，controller访问网页地址后，读取页面数据，调用业务逻辑。MVC耦合性低，允许更改视图层代码而不重新编译模型和控制器，但是增加了系统结构和实现的复杂性。
+
+
+
+
+Thinking2	基于Python的可视化技术都有哪些，你使用过哪些
+
+基于python常用的可视化工具有matplotlib，seaborn, plotly, wordcloud, graphviz, pyecharts, echarts, flask. 
+可用于实现画折线图、条形图、箱线图、饼图、热力图、蜘蛛图、二元变量分布图、词云展示、决策树可视化、dashboard搭建等功能。
+我使用过matplotlib，seaborn，ploty。
