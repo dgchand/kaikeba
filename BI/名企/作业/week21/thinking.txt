@@ -1,0 +1,79 @@
+
+---------
+Thinking1	
+电商定向广告和搜索广告有怎样的区别，算法模型是否有差别			
+"能简要说明两者的区别（5points）
+能说明算法模型有哪些差别或不同的算法模型（5points）"
+
+电商定向广告中用户没有很明显的意图（主动的Query查询）用户来到淘宝之前，自己也没有特别明确的目标（利用以往的历史行为 => item推荐）；
+而搜索广告中对于用户在搜索场景下，用户在搜索栏上搜query，更多是短时的强烈的意图，所以及时满足用户的需求。
+
+
+---------
+Thinking2	
+定向广告都有哪些常见的使用模型，包括Attention机制模型			
+"能简要说明常用的模型（10pionts）
+"
+
+常见的使用模型有：
+	LR+人工特征
+	MLR 非线性，混合罗辑回归，分而治之，比人工提高了效率和精度
+	DNN深度学习，使用GPU处理复杂模型和大量数据
+	DIN 兴趣捕捉 deep interest network 深度兴趣网络
+	DIEN deep interest evolution network 兴趣随时间演化
+	DISN兴趣会话 deep session interest network
+
+
+
+---------
+Thinking3	
+DIN中的Attention机制思想和原理是怎样的			
+能简要说明Attention思想和原理（10points）
+
+Attention机制在对用户行为的embedding计算上引入了attention network (也称为Activation Unit) 。把用户历史行为特征进行embedding操作，视为对用户兴趣的表示，之后通过Attention Unit，对每个兴趣表示赋予不同的权值。
+
+Attention思想：在pooling的时候，与 candidate Ad 相关的商品权重大一些，与candidate Ad 不相关的商品权重小一些
+Attention分数，将candidate Ad与历史行为的每个商品发生交互来计算
+Activation Unit输出Activation Weight，输入包括用户行为embedding和候选广告embedding以外，还考虑了他们两个的外积。对于不同的candidate ad，得到的用户行为表示向量也不同
+
+Attention机制：不对点击序列的Attention分数做归一化，直接将分数与对应商品的embedding向量做加权和，目的在于保留用户的兴趣强度
+
+
+
+
+
+---------
+Thinking4	
+DIEN相比于DIN有哪些创新			
+能简要说明DIEN的创新之处（10points）
+
+DIEN结构引入序列模型AUGRU模拟用户兴趣进化的过程。embedding layer 和 concatenate layer之间加入生成兴趣的interest extractor layer和模拟兴趣演化的interest evolving layer，使用behavior layer，interest extractor layer 以及 interest evolving layer从用户历史行为中挖掘用户与目标商品相关的兴趣及演变。
+
+
+
+
+---------
+Thinking5	
+DSIN关于Session的洞察是怎样的，如何对Session兴趣进行表达			
+能简要说明DSIN关于Session兴趣的表达方式（10points）
+
+Session视角，每个Session中的行为是相近的，而在不同会话之间差别是很大的（类似聚类），将用户的点击行为按照时间排序，前后的时间间隔大于30min，算成另一个session。包含session division layer，序列切分层、session interest extractor layer，会话兴趣抽取层、session interest interacting layer，会话间兴趣交互层、session interest activating layer，会话兴趣激活层。
+
+会话兴趣抽取层（Session Interest Extractor Layer）：目的是寻找session内部的行为之间关系，进一步提取session interest（使用transformer对Session行为进行处理）对每个Session用multi-head self-attention（多头自注意力）机制捕获行为之间内部关系，减少不相关行为的影响。
+
+会话兴趣交互层（Session Interest Interacting Layer）：将会话兴趣抽取层的输出作为该层的输入，用Bi-LSTM模拟不同会话的兴趣动态改变
+
+
+
+
+
+
+
+---------
+Thinking6	
+如果你来设计淘宝定向广告，会有哪些future work（即下一个阶段的idea）			
+"给出你的想法（5points）
+想法具有创新性（5points）"
+
+在之前已有模型的基础上，DISN兴趣会话模型的基础上，增加对购物者下单位置的考虑，对各个地区的购物行为作出聚类层。
+
